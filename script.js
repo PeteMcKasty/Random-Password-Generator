@@ -6,14 +6,17 @@ let useUppercase = false;
 let useNumeric = false;
 let useSpecial = false;
 let parameters = "";
-var characterSet = "";
-var lowercaseChars = "abcdefghijklmnopqrstuvwxyz"
-var uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-var numericChars = "0123456789"
-var specialChars = "!#$%&()*"
+let characterSet = "";
+let lowercaseChars = "abcdefghijklmnopqrstuvwxyz"
+let uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+let numericChars = "0123456789"
+let specialChars = "!#$%&()*"
 
 function checkLength() {
   var passwordLength1 = prompt("Enter the length of the password (between 8 and 128 characters):");
+  while (isNaN(passwordLength1) || passwordLength1 < 8 || passwordLength1 > 128) {
+    passwordLength1 = prompt("Please enter a valid length for your password (between 8 and 128 characters):");
+  }
   return passwordLength1;
 }
 
@@ -47,6 +50,16 @@ function getParameters() {
 
   return characterSet;
 }
+
+function generatePassword() {
+  var password1 = "";
+  for (var i = 0; i < passwordLength; i++) {
+    var randomize = Math.floor(Math.random() * characterSet.length);
+    password1 += characterSet[randomize];
+  }
+  return password1;
+}
+
 // Write password to the #password input
 function writePassword (){
   passwordLength = checkLength()
@@ -56,13 +69,6 @@ function writePassword (){
   passwordText.value = password;
 
 }
-
-function generatePassword() {
-}
-
-// while (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
-//   passwordLength = parseInt(prompt("Please enter a valid length for your password (between 8 and 128 characters):"));
-// }
 
 
 // Add event listener to generate button
